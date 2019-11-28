@@ -24,7 +24,7 @@ public class RkoEvent extends ListenerAdapter {
         public void onUserTyping(UserTypingEvent event){
 
             String user = event.getMember().getAsMention();
-            int rng = (int)(Math.random() * 2);
+            int rng = (int)(Math.random() * 10);
 
 
             if (event.getMember().getEffectiveName().equals("RKOdFromNoWhere")){
@@ -35,8 +35,28 @@ public class RkoEvent extends ListenerAdapter {
 
             else if (event.getMember().getEffectiveName().equals("MrMustangRider")){
 
-                if (rng == 1)
-                    event.getChannel().sendMessage("Going fail another calc 3 class pussy boi? " + user).queue();
+                if (rng == 0)
+                    event.getChannel().sendMessage("Going to fail another calc 3 class pussy boi? " + user).queue();
             }
+
+            else if (event.getMember().getEffectiveName().equals("austin B")){
+
+                if (rng == 0)
+                    event.getChannel().sendMessage("Go suck a mandingo! " + user).queue();
+            }
+
+            else if (event.getMember().getEffectiveName().equals("Ctrl")){
+
+                if (rng == 0)
+                    event.getChannel().sendMessage("STFU with your giraffe looking neck! " + user).queue();
+            }
+
+            else if (event.getMember().getEffectiveName().equals("ZacFromGeico")){
+
+                if (rng == 0)
+                    event.getChannel().sendMessage("Still playing only early access games dipshit? " + user).queue();
+            }
+
+
         }
 }

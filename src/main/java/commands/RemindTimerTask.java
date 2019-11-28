@@ -12,6 +12,7 @@ public class RemindTimerTask extends TimerTask {
     }
 
     public void setText(String text){
+
         this.text = text;
     }
 
