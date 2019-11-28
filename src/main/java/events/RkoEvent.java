@@ -41,8 +41,8 @@ public class RkoEvent extends ListenerAdapter {
 
             else if (event.getMember().getEffectiveName().equals("austin B")){
 
-                if (rng == 0)
-                    event.getChannel().sendMessage("Go suck a mandingo! " + user).queue();
+                if (rng >= 0)
+                    event.getChannel().sendMessage("Go suck a mandingo! " + user + "https://media.discordapp.net/attachments/193278651020738561/563877478020415501/SaveMeRicardo.gif").queue();
             }
 
             else if (event.getMember().getEffectiveName().equals("Ctrl")){
