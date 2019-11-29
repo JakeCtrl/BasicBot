@@ -27,12 +27,14 @@ public class ServerInfo extends Command {
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(Color.RED);
         eb.setAuthor(e.getGuild().getName());
-        eb.setThumbnail("http://img3.wikia.nocookie.net/__cb20121223024203/callofduty/images/f/f1/Zombie_Rank_8_Icon_BOII.png");
+        eb.setThumbnail(  e.getGuild().getIconUrl());
         eb.addField("Server Owner: " , e.getGuild().getOwner().getEffectiveName(), true);
         //eb.addField("MemberCount: ", Integer.toString(e.getGuild().getMembers().size()), true);
-        eb.setDescription("**Invite Link** \n" + "");
+        eb.setDescription("**Invite Link** \n" + " PLACEHOLDER ");
 
         //e.reply("This is a test");
+
+        // Build the EmbedBuilder plus send the message
         e.getChannel().sendMessage(eb.build()).queue();
     }
 

@@ -1,6 +1,7 @@
 
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import commands.RemindMe;
 import commands.ServerInfo;
 import events.RkoEvent;
@@ -21,6 +22,7 @@ public class Bot {
 
         JDA jda = new JDABuilder(token).build();
 
+        EventWaiter waiter = new EventWaiter();
         //jda.addEventListener(new RkoEvent());
         //jda.addEventListener(new RemindMe());
 
@@ -38,6 +40,8 @@ public class Bot {
         // Adds a new command to the builder
         // ==============================================================================Commands
         builder.addCommand(new ServerInfo());
+
+        builder.addCommand(new RemindMe());
 
         // Creates new client obj by using the .build method on the CommandClientBuilder
         CommandClient client = builder.build();

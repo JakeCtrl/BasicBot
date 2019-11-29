@@ -1,69 +1,112 @@
 package commands;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import com.jagrosh.jdautilities.command.Command;
+import com.jagrosh.jdautilities.command.CommandEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
 
+import java.awt.*;
 import java.time.OffsetDateTime;
-import java.util.Timer;
-import java.util.Date;
-import java.util.TimerTask;
 
 
 
 
-public class RemindMe extends ListenerAdapter {
 
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-
-        /*
-        int modifier = -1;
-        String[] msg = e.getMessage().getContentRaw().split(" ");
-
-        // Create OffsetDateTime obj from discord api
-        OffsetDateTime sendTime = e.getMessage().getTimeCreated();
-
-        // Create a date for execution
-        Date date = new Date(sendTime.getDayOfYear(), sendTime.getDayOfMonth(), sendTime.getHour(), sendTime.getMinute(), sendTime.getSecond());
-
-        // Create a Timer Obj
-        Timer timer = new Timer();
-
-        // TimerTask obj created
-        RemindTimerTask task = new RemindTimerTask();
+public class RemindMe extends Command {
 
 
-        if (msg[0].equalsIgnoreCase(";RemindMe")) {
-            if (!e.getMember().getUser().isBot()) {
+    public RemindMe(){
+        super.name = "remindMe";
+        super.help = "Set a reminder for the user";
+        super.aliases  = new String[]{"remind"};
+        super.cooldown = 10;
 
-                if (msg[2].equalsIgnoreCase("Day")) {
+    }
 
-                    modifier = 0;
+    @Override
+    protected void execute (CommandEvent event) {
 
-                    // Get user number of days
-                    Integer day = Integer.parseInt(msg[1]);
+        //Constants
+        final int RATE = 1000;
 
-                    //e.getChannel().sendMessage("Yes" + e.getMessage().getTimeCreated()).queue();
+        // Variables
+        String[] reminder = event.getMessage().getContentRaw().split(" ");
+        EmbedBuilder eb = new EmbedBuilder();
 
-                    // Add a amt of day'(s) to OffsetDateTime obj
-                    sendTime = sendTime.plusDays(day);
+        OffsetDateTime timeCreated = event.getMessage().getTimeCreated();
+        OffsetDateTime timeToDeliver = null;
+        long secCreated = timeCreated.toEpochSecond();
+        long secDeliver = 0;
+        int delay = 0;
 
-                    // Change date obj to future time
-                    date.setDate(day);
+        // =========================================================================Setting up EmbedBuilder
+        eb.setColor(Color.RED);
+        eb.addField("**Reminder: **", event.getMessage().getContentRaw(), true);
+        //==========================================================================
 
-                    // Schedule a task
-                    timer.schedule(task, date);
-
-                    // setString in task
-
-                    task.run();
-
-                }
-            }
+        if (reminder[1].equalsIgnoreCase("1") && reminder[2].equalsIgnoreCase("Sec") ){
+            timeToDeliver = timeCreated.plusSeconds(Integer.parseInt(reminder[1]));
+            secDeliver = timeToDeliver.toEpochSecond();
         }
 
-        */
+        else if ((Integer.parseInt(reminder[1]) <= 60) && reminder[2].equalsIgnoreCase("Sec")){
+            timeToDeliver = timeCreated.plusSeconds(Integer.parseInt(reminder[1]));
+            secDeliver = timeToDeliver.toEpochSecond();
+        }
+
+        else if(reminder[1].equalsIgnoreCase("1") && reminder[2].equalsIgnoreCase("Min")){
+            timeToDeliver = timeCreated.plusMinutes(1);
+            secDeliver = timeToDeliver.toEpochSecond();
+        }
+
+        else if((Integer.parseInt(reminder[1]) >= 1) && reminder[2].equalsIgnoreCase("Mins")) {
+            timeToDeliver = timeCreated.plusMinutes(Integer.parseInt(reminder[1]));
+            secDeliver = timeToDeliver.toEpochSecond();
+        }
+
+        else if(reminder[1].equalsIgnoreCase("1") && reminder[2].equalsIgnoreCase("Day")){
+            timeToDeliver = timeCreated.plusDays(1);
+            secDeliver = timeToDeliver.toEpochSecond();
+        }
+
+        else if((Integer.parseInt(reminder[1]) >= 1) && reminder[2].equalsIgnoreCase("Days")) {
+            timeToDeliver = timeCreated.plusDays(Integer.parseInt(reminder[1]));
+            secDeliver = timeToDeliver.toEpochSecond();
+        }
+
+        else if(reminder[1].equalsIgnoreCase("1") && reminder[2].equalsIgnoreCase("Month")){
+            timeToDeliver = timeCreated.plusMonths(1);
+            secDeliver = timeToDeliver.toEpochSecond();
+        }
+
+        else if((Integer.parseInt(reminder[1]) >= 1) && reminder[2].equalsIgnoreCase("Months")) {
+            timeToDeliver = timeCreated.plusDays(Integer.parseInt(reminder[1]));
+            secDeliver = timeToDeliver.toEpochSecond();
+        }
+
+        else {
+            timeToDeliver = timeCreated;
+            secDeliver = secCreated;
+        }
 
 
+
+
+
+
+
+
+        try{
+            if (!(timeToDeliver == timeCreated)){
+                Thread.sleep((secDeliver - secCreated)* RATE);
+                event.getChannel().sendMessage(eb.build()).queue();
+            }
+            else{
+                event.reply(event.getMember().getAsMention() +" Invalid Input");
+            }
+
+        }catch (Exception e){
+
+        }
 
     }
 }
