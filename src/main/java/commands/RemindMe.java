@@ -8,10 +8,14 @@ import java.util.Timer;
 import java.util.Date;
 import java.util.TimerTask;
 
+
+
+
 public class RemindMe extends ListenerAdapter {
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
 
+        /*
         int modifier = -1;
         String[] msg = e.getMessage().getContentRaw().split(" ");
 
@@ -56,5 +60,10 @@ public class RemindMe extends ListenerAdapter {
                 }
             }
         }
+
+        */
+
+
+
     }
 }
