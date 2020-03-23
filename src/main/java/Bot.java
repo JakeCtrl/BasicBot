@@ -23,7 +23,7 @@ public class Bot {
         JDA jda = new JDABuilder(token).build();
 
         EventWaiter waiter = new EventWaiter();
-        //jda.addEventListener(new RkoEvent());
+        jda.addEventListener(new RkoEvent());
         //jda.addEventListener(new RemindMe());
 
         CommandClientBuilder builder = new CommandClientBuilder();

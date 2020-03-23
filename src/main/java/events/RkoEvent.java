@@ -30,31 +30,31 @@ public class RkoEvent extends ListenerAdapter {
             if (event.getMember().getEffectiveName().equals("RKOdFromNoWhere")){
 
                 if (rng == 0)
-                    event.getChannel().sendMessage("Did you miss another AWP shot fuk boi? " + user).queue();
+                    event.getChannel().sendMessage("Hey" + user).queue();
             }
 
             else if (event.getMember().getEffectiveName().equals("MrMustangRider")){
 
                 if (rng == 0)
-                    event.getChannel().sendMessage("Going to fail another calc 3 class pussy boi? " + user).queue();
+                    event.getChannel().sendMessage("Hi? " + user).queue();
             }
 
             else if (event.getMember().getEffectiveName().equals("austin B")){
 
                 if (rng == 0)
-                    event.getChannel().sendMessage("Go suck a mandingo! " + user ).queue();
+                    event.getChannel().sendMessage("How are you! " + user ).queue();
             }
 
             else if (event.getMember().getEffectiveName().equals("Ctrl")){
 
                 if (rng == 0)
-                    event.getChannel().sendMessage("STFU with your giraffe looking neck! " + user).queue();
+                    event.getChannel().sendMessage("^_^ " + user).queue();
             }
 
             else if (event.getMember().getEffectiveName().equals("ZacFromGeico")){
 
                 if (rng == 0)
-                    event.getChannel().sendMessage("Still playing only early access games dipshit? " + user).queue();
+                    event.getChannel().sendMessage("How are you? " + user).queue();
             }
 
 
